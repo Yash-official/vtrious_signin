@@ -54,8 +54,14 @@ class MyHomePage extends StatelessWidget {
                     )),
                 padding: EdgeInsets.symmetric(horizontal: 23),
                 height: 70,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                alignment: Alignment.center,
+                width: 330,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [Color(0xFFC41B09), Color(0xFFDF3907)])),
               ),
             ),
             SizedBox(

@@ -4,8 +4,11 @@ import 'package:vtriousapp/screens/loginscreen.dart';
 import 'screens/details.dart';
 import 'screens/homepage.dart';
 import 'screens/registerscreen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -21,12 +24,12 @@ class MyApp extends StatelessWidget {
               headline1: TextStyle(
                 color: Colors.white,
                 fontSize: 35,
-                fontFamily: 'Poppins',
+                fontFamily: 'Roboto',
                 fontWeight: FontWeight.w900,
               ),
               bodyText1: TextStyle(
                 color: Colors.white,
-                fontFamily: 'Poppins',
+                fontFamily: 'Roboto',
                 fontSize: 14,
                 fontWeight: FontWeight.w900,
               ),

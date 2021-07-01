@@ -5,6 +5,24 @@ class DetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Container(
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Details of the Person',
+              style: Theme.of(context).textTheme.headline1,
+            ),
+            Text(
+              'please sign in to your account',
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
