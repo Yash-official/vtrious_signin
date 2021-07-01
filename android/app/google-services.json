@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "474568119743",
+    "project_id": "vtrious-f0af9",
+    "storage_bucket": "vtrious-f0af9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474568119743:android:40f5175c89dc8ae53f7d0a",
+        "android_client_info": {
+          "package_name": "com.yashh.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "474568119743-9togdvbpbc912hfu6f5e2riue74iqa8h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yashh.dev",
+            "certificate_hash": "08a1058dd221437154f1efb63abdec042feb2b77"
+          }
+        },
+        {
+          "client_id": "474568119743-udao1rdk2tqjv8u0rij7gl7mvf6dkmqv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2ra47ZEuB1Q15fA2qcS5Ozk6r2chc0X8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "474568119743-udao1rdk2tqjv8u0rij7gl7mvf6dkmqv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
