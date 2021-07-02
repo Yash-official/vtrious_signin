@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vtriousapp/authentication_service.dart';
+import 'package:vtriousapp/GoogleSignIn/authentication_service.dart';
 import 'package:vtriousapp/screens/loginscreen.dart';
 
 import 'screens/homepage.dart';
