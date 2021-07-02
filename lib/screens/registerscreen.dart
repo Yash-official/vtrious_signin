@@ -1,4 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:vtriousapp/screens/details.dart';
+
+final _firestore = FirebaseFirestore.instance;
+late User loggedInUser;
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -8,6 +14,11 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final _auth = FirebaseAuth.instance;
+  late String email;
+  late String password;
+  late String fullName;
+  late String phoneNum;
   @override
   Widget build(BuildContext context) {
     bool istrue = true;
@@ -44,6 +55,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           borderRadius: BorderRadius.circular(15),
                           color: Colors.white.withOpacity(0.15)),
                       child: TextField(
+                          onChanged: (value) => fullName = value,
                           style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'Roboto',
@@ -63,6 +75,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           borderRadius: BorderRadius.circular(15),
                           color: Colors.white.withOpacity(0.15)),
                       child: TextField(
+                          onChanged: (value) => email = value,
                           keyboardType: TextInputType.emailAddress,
                           style: TextStyle(
                               color: Colors.white,
@@ -83,6 +96,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           borderRadius: BorderRadius.circular(15),
                           color: Colors.white.withOpacity(0.15)),
                       child: TextField(
+                          onChanged: (value) => phoneNum = value,
                           keyboardType: TextInputType.number,
                           style: TextStyle(
                               color: Colors.white,
@@ -106,6 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         children: [
                           Expanded(
                             child: TextField(
+                                onChanged: (value) => password = value,
                                 obscureText: istrue,
                                 style: TextStyle(
                                     color: Colors.white,
@@ -142,8 +157,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 height: 70,
               ),
               GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, 'userdetails');
+                onTap: () async {
+                  final newUser = await _auth.createUserWithEmailAndPassword(
+                      email: email, password: password);
+                  _firestore.collection('userData').doc(email).set({
+                    'Full Name': fullName,
+                    'email': email,
+                    'phonenum': phoneNum,
+                    'password': password
+                  });
+                  await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DetailsPage(email)));
                 },
                 child: Container(
                   child: Text('Sign Up',

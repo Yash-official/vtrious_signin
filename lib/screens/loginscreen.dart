@@ -1,6 +1,8 @@
 import 'dart:ui';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:vtriousapp/screens/details.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -10,6 +12,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  late String email;
+  late String password;
+  final _auth = FirebaseAuth.instance;
   bool istrue = true;
   @override
   Widget build(BuildContext context) {
@@ -42,6 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderRadius: BorderRadius.circular(15),
                     color: Colors.white.withOpacity(0.15)),
                 child: TextField(
+                    onChanged: (value) => email = value,
                     style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Roboto',
@@ -67,6 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Expanded(
                       child: TextField(
+                          onChanged: (value) => password = value,
                           obscureText: istrue,
                           style: TextStyle(
                               color: Colors.white,
@@ -104,7 +111,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 70,
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () async {
+                  final user = await _auth.signInWithEmailAndPassword(
+                      email: email, password: password);
+                  await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DetailsPage(email)));
+                },
                 child: Container(
                   child: Text('Sign In',
                       style: TextStyle(
