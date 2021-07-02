@@ -169,7 +169,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   await Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => DetailsPage(email, password)));
+                          builder: (context) => DetailsPage(email)));
                 },
                 child: Container(
                   child: Text('Sign Up',

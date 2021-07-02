@@ -2,11 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 final _firestore = FirebaseFirestore.instance;
+String? fullName;
+String? phoneNum;
+String? password;
 
 class DetailsPage extends StatefulWidget {
-  DetailsPage(this.userEmail, this.password);
-  String userEmail;
-  String password;
+  DetailsPage(this.userEmail);
+  final String? userEmail;
+
   @override
   _DetailsPageState createState() => _DetailsPageState();
 }
@@ -14,19 +17,19 @@ class DetailsPage extends StatefulWidget {
 class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
-    late String fullName;
-    late String email = widget.userEmail;
-    // Future<void> getUserData() async {
-    //   final userData = await _firestore
-    //       .collection('userData')
-    //       .doc(email)
-    //       .get()
-    //       .then((DocumentSnapshot documentSnapshot) {
-    //     Map<String, dynamic> data =
-    //         documentSnapshot.data() as Map<String, dynamic>;
-    //     fullName = data["Full Name"];
-    //   });
-    // }
+    String? email = widget.userEmail;
+    _firestore
+        .collection('userData')
+        .doc(email)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        print('Document exists on the database');
+      }
+      fullName = documentSnapshot.get('Full Name');
+      phoneNum = documentSnapshot.get('phonenum');
+      password = documentSnapshot.get('password');
+    });
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -43,10 +46,10 @@ class _DetailsPageState extends State<DetailsPage> {
             Text(
               'please sign in to your account',
             ),
-            Text('Full Name : fullName'),
+            Text('Full Name : $fullName'),
             Text('email : $email'),
-            Text('Phone Number : phonenum'),
-            Text('password : password')
+            Text('Phone Number : $phoneNum'),
+            Text('password : $password')
           ],
         ),
       ),

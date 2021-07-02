@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vtriousapp/authentication_service.dart';
 import 'package:vtriousapp/screens/details.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -112,12 +114,12 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               GestureDetector(
                 onTap: () async {
-                  final user = await _auth.signInWithEmailAndPassword(
+                  await _auth.signInWithEmailAndPassword(
                       email: email, password: password);
                   await Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => DetailsPage(email, password)));
+                          builder: (context) => DetailsPage(email)));
                 },
                 child: Container(
                   child: Text('Sign In',
@@ -143,7 +145,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 10,
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  final provider =
+                      Provider.of<GoogleSigninProvider>(context, listen: false);
+                  provider.googleLogin();
+                },
                 child: Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -190,6 +196,23 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class GoogleSignIn extends StatelessWidget {
+  const GoogleSignIn({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          final currentUser = FirebaseAuth.instance.currentUser!.email;
+          return DetailsPage(currentUser);
+        },
       ),
     );
   }
