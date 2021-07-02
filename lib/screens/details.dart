@@ -38,6 +38,7 @@ class _DetailsPageState extends State<DetailsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+
             Text(
               'Details of the Person',
               style: Theme.of(context).textTheme.headline1,
@@ -45,9 +46,13 @@ class _DetailsPageState extends State<DetailsPage> {
             Text(
               'please sign in to your account',
             ),
+            SizedBox(height: 90,),
             Text('Full Name : $fullName'),
+            SizedBox(height: 64,),
             Text('email : $email'),
+            SizedBox(height: 64,),
             Text('Phone Number : $phoneNum'),
+            SizedBox(height: 64,),
             Text('password : $password')
           ],
         ),
