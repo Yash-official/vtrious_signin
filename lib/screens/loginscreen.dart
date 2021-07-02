@@ -117,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   await Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => DetailsPage(email)));
+                          builder: (context) => DetailsPage(email, password)));
                 },
                 child: Container(
                   child: Text('Sign In',

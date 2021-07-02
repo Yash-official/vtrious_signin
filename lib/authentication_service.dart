@@ -1,30 +1,20 @@
+import 'dart:html';
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
-class AuthenticationService {
-  final FirebaseAuth _firebaseAuth;
-  Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
-  AuthenticationService(this._firebaseAuth);
-  Future<String?> signIn(
-      {required String email, required String password}) async {
-    try {
-      await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
-      return "Signed In";
-    } on FirebaseAuthException catch (e) {
-      return 'Error';
-    }
-  }
+class GoogleSigninProvider extends ChangeNotifier {
+  final googlesignin = GoogleSignIn();
+  GoogleSignInAccount? _user;
+  GoogleSignInAccount get user => _user!;
 
-  Future<String?> signUp(
-      {required String email, required String password}) async {
-    try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      return "Signed up";
-    } on FirebaseAuthException catch (e) {
-      return 'Error';
-    }
+  Future googleLogin() async {
+    final googleUser = await googlesignin.signIn();
+    if (googleUser == null) return;
+    _user = googleUser;
+    
+    
+        await FirebaseAuth.instance.
   }
 }
